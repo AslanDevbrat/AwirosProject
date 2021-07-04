@@ -2,16 +2,22 @@
 import cv2
 import numpy as np
 import os
+
 from matplotlib import pyplot as ptl
 import time
 import mediapipe as mp
-
+#from DataCollections import DATA_PATH
+from sklearn.model_selection import train_test_split
+from tensorflow.keras.utils import to_categorical
+#from LoadData import load_data
 # Key points using MP Holistics
 
 # Holistic model
 mp_holistic = mp.solutions.holistic
 # Drawing Utilities
 mp_drawing = mp.solutions.drawing_utils
+# path for exported data, numpy arrays
+DATA_PATH = os.path.join('E:\\9th sem\\MS_Thesis\\Awiros\\Project\\data\\MP_DATA')
 
 
 def mediapipe_detection(image, model):
@@ -52,6 +58,32 @@ def extract_keypoints(results):
                    results.right_hand_landmarks.landmark]).flatten() if results.right_hand_landmarks else np.zeros(
         21 * 3)
     return np.concatenate([pose, face, lh, rh])
+
+
+#preprocess Data and create Label and features
+actions = np.array(['hello', 'thanks', 'iloveyou'])
+
+no_sequences = 30
+sequence_length = 30
+
+label_map = {label: num for num, label in enumerate(actions)}
+
+
+def load_data():
+    sequences, labels = [], []
+    for action in actions:
+        for sequence in range(no_sequences):
+            window = []
+            for frame_num in range(sequence_length):
+                res = np.load(os.path.join(DATA_PATH, action, str(sequence), "{}.npy".format(frame_num)))
+                window.append(res)
+            sequences.append(window)
+            labels.append(label_map[action])
+    return np.array(sequences), labels
+X, Y = load_data()
+
+y = to_categorical(Y).astype(int)
+
 
 
 
