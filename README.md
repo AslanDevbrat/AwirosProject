@@ -29,3 +29,8 @@ https://user-images.githubusercontent.com/39759685/135709750-412a2033-4a9a-4f6c-
 
 https://user-images.githubusercontent.com/39759685/135709719-46df639d-1121-4707-ac73-13b953c716ed.mp4
 
+## Model Performance (Confusion Matrixs)
+| Action : Hello | Action : Thanks | Action : I love You |
+| ----------------------------------------- | --------------------------------- | ------------------------------|   
+| ![image](https://user-images.githubusercontent.com/39759685/135710358-61d63aca-5885-403a-9bf3-ed9e66712d34.png) | ![image](https://user-images.githubusercontent.com/39759685/135710376-38a0205b-4176-4ddb-892d-24857e0931fb.png) | ![image](https://user-images.githubusercontent.com/39759685/135710384-0579dbbf-7810-4d36-9aaa-2c3f59e76eca.png) |
+
